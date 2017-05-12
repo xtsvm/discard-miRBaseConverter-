@@ -1,1 +1,1 @@
-BiocGenerics:::testPackage("miRBaseConvetor")
+BiocGenerics:::testPackage("miRBaseConverter")
