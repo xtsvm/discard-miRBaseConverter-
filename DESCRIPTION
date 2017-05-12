@@ -1,0 +1,16 @@
+Package: miRBaseConverter
+Type: Package
+Title:miRBase Converter for miRNA Name, Accession and Versions
+Version: 0.99.0
+Date: 2017-5-9
+Author: Taosheng Xu<taosheng.x@gmail.com>
+Maintainer: Taosheng Xu<taosheng.x@gmail.com>
+Imports: stats
+Depends: R (>= 3.4)
+Description: miRBaseConverter is designed for miRBase conversion between miRNA Names, Accession in different updated versions. The package involves a small build-in database without any other depends. It can process a huge number of miRNAs in very short time.
+License: GPL (>= 2)
+LazyData: TRUE
+Suggests: BiocGenerics, knitr
+VignetteBuilder: knitr
+biocViews: Software, miRNA
+RoxygenNote: 6.0.1

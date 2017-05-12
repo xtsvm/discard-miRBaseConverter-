@@ -1,0 +1,148 @@
+---
+title: "An introduction of miRBaseConverter"
+author: "Taosheng Xu"
+date: '`r Sys.Date()`'
+output:
+  html_document: default
+  pdf_document: default
+vignette: |
+  %\VignetteIndexEntry{miRBaseConverter}  %\VignetteEncoding{UTF-8}  %\VignetteEngine{knitr::rmarkdown}
+---
+
+<style>
+pre {
+  overflow-x: auto;
+}
+pre code {
+  word-wrap: normal;
+  white-space: pre;
+}
+</style>
+```{r global_options, echo = FALSE, include = FALSE}
+options(width =999)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
+                      cache = FALSE, tidy = FALSE, size = "small")
+```
+
+# 1. Introduction
+
+*miRBaseConverter* is a R package for retrieving the miRNA information in miRBase different versions (From version 6 to version 21). 
+
+With the development of miRNA research, the definition name of most miRNAs has been changed a lot. But the annotations in most previous miRNA researches had adopted the old names. It is a barrier for the later scholars to reuse the results in an easy way, especially for miRNA databases with thousands of entries. We admit that there are some webservers can handle the batch conversion of miRNA names. However, 
+an easy and well-documented R package for miRNA conversion is still lack.  
+
+To bridge this gap, we present the *miRBaseConverter* package, a convenient tool for users to conduct miRNA conversion in R, to provide a suite of tools for checking miRNA Name, Accession, Sequence, version and history. The *miRBaseConverter* package can be competent for all species including Precursor and Mature miRNAs defined in miRBase. *miRBaseConverter* work with a small build-in database. The purpose of this package is to provide a handy tool for the demands of researches about miRNA version convert and comparison of historical information.
+
+In the following section, we present the detail functions of the *miRBaseConverter* package.
+  
+# 2. miRNA Version check
+For a list of miRNA names without version information, users may need to check which the most possible miRBase version for the list miRNA names. 
+
+```{r message = FALSE,warning=FALSE}
+rm(list = ls())
+library(miRBaseConverter)
+data(miRNATest)
+miRNANames=miRNATest[,2]
+checkMiRNAVersion(miRNANames)
+```
+
+# 3. miRNA Name to miRNA miRBase Accession ID conversion
+Each miRNA name is corresponding to an  Accession ID. The Accession ID is an identifier that define miRNA uniquely and never change. 
+
+```{r message = FALSE,warning=FALSE}
+rm(list = ls())
+library(miRBaseConverter)
+data(miRNATest)
+miRNANames=miRNATest[,2]
+result1=miRNA_NameToAccession(miRNANames,Version="v18")
+unique(result1)[c(450:460),]
+```
+The 'NA' represents no  Accession ID can be matched in the specific version.
+
+# 4. miRBase Accession ID to miRNA Name conversion
+```{r message = FALSE,warning=FALSE}
+rm(list = ls())
+library(miRBaseConverter)
+data(miRNATest)
+AccessionIDs=miRNATest[,1]
+result1=miRNA_AccessionToName(AccessionIDs,targetVersion="v13")
+unique(result1)[c(450:460),]
+result2=miRNA_AccessionToName(AccessionIDs,targetVersion="v21")
+unique(result2)[c(450:460),]
+
+```
+
+# 5. The conversion of miRNA names between two different versions.
+In *miRBaseConverter* package, we have two ways to conduct the conversion of miRNA names between two different versions.
+
+####(1) We provide a function for miRBase name conversion in different versions. This function can detect all the match miRNA name with the same Accession ID in history versions. So it may not totally exact matched.
+
+```{r message = FALSE,warning=FALSE}
+rm(list = ls())
+library(miRBaseConverter)
+data(miRNATest)
+miRNANames=miRNATest[,2]
+result1=miRNAVersionConvert(miRNANames,targetVersion="v13",exact=TRUE)
+result2=miRNAVersionConvert(miRNANames,targetVersion="v21",exact=TRUE)
+result3=miRNAVersionConvert(miRNANames,targetVersion="v21",exact=FALSE)
+unique(result3)[c(450:460),]
+```
+
+####(2) Three steps for miRNA names conversion[check Version->NameToAccession->AccessionToName]. This method can output more exact matched results.
+```{r message = FALSE,warning=FALSE}
+rm(list = ls())
+library(miRBaseConverter)
+data(miRNATest)
+miRNANames=miRNATest[,2]
+##Step 1. Check the possible version for miRNAs
+data(miRNATest)
+miRNANames=miRNATest[,2]
+checkMiRNAVersion(miRNANames)
+##Step 2. miRNA Name to miRBase Accession ID with the specific version information
+result1=miRNA_NameToAccession(miRNANames,Version="v18")
+##Step 3. miRBase Accession ID to the miRNA Names of target version
+result2=miRNA_AccessionToName(result1[,2],targetVersion="v21")
+unique(result2)[c(450:460),]
+```
+
+# 6. Retrieve the sequence of miRNAS in R
+
+```{r message = FALSE,warning=FALSE}
+rm(list = ls())
+library(miRBaseConverter)
+data(miRNATest)
+AccessionIDs=miRNATest[,1]
+result1=getMiRNASequence(AccessionIDs,targetVersion="v13")
+head(result1)
+result2=getMiRNASequence(AccessionIDs,targetVersion="v21")
+head(result2)
+```
+
+# 7. Retrieve the history information of  a single specified miRNA
+
+```{r message = FALSE,warning=FALSE}
+rm(list = ls())
+#####1,The input is a miRNA Name
+name="hsa-miR-26b-5p"
+result1=miRNAVersionConvert(name,targetVersion="v21",exact=TRUE)
+AccessionID=result1[,3]
+result2=getMiRNAHistory(AccessionID)
+result2
+#####2,The input is miRNA Accession Id
+AccessionID="MIMAT0000765"
+result3=getMiRNAHistory(AccessionID)
+result3
+```
+
+# 8.  Conclusion
+The *miRBaseConverter* package provides the basic and the very useful functional units for miRNA annotaiton and retrieval. We wish that will the *miRBaseConverter* package will speed up the research into miRNAs batch processing in R. 
+  
+# 9. References
+  [1] Kozomara, Ana, and Sam Griffiths-Jones. "miRBase: annotating high confidence microRNAs using deep sequencing data." Nucleic acids research 42.D1 (2014): D68-D73.
+  
+  [2] Kozomara, Ana, and Sam Griffiths-Jones. "miRBase: integrating microRNA annotation and deep-sequencing data." Nucleic acids research (2010): gkq1027.
+  
+  [3] Griffiths-Jones, Sam, et al. "miRBase: tools for microRNA genomics." Nucleic acids research 36.suppl 1 (2008): D154-D158.
+  
+  [4] Griffiths-Jones, Sam, et al. "miRBase: microRNA sequences, targets and gene nomenclature." Nucleic acids research 34.suppl 1 (2006): D140-D144.
+
