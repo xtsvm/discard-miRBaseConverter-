@@ -2,11 +2,11 @@
 title: "An introduction of miRBaseConverter"
 author: "Taosheng Xu"
 date: '`r Sys.Date()`'
-output:
-  html_document: default
-  pdf_document: default
-vignette: |
-  %\VignetteIndexEntry{miRBaseConverter}  %\VignetteEncoding{UTF-8}  %\VignetteEngine{knitr::rmarkdown}
+output: html_document
+vignette: >
+  %\VignetteIndexEntry{miRBaseConverter} 
+  %\VignetteEncoding{UTF-8} 
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 <style>
