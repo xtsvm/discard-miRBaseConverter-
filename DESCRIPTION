@@ -13,4 +13,6 @@ LazyData: TRUE
 Suggests: BiocGenerics, knitr
 VignetteBuilder: knitr
 biocViews: Software, miRNA
+URL: https://github.com/xtsvm/miRBaseConverter
+BugReports: https://github.com/xtsvm/miRBaseConverter/issues
 RoxygenNote: 6.0.1
