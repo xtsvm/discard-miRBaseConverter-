@@ -16,24 +16,20 @@
 #'
 #' @return
 #' A nx3 data matrix. The number of row equals to input miRNA name. The three columns are defined as below:
-#'
-#'
-#'  \strong{Column 1} : The original miRNA name.\cr
-#'  \strong{Column 2} : The converted miRBase name (in specified version) corresponding to the original miRNA name.\cr
-#'  \strong{Column 3} : The corresponding miRBase accession ID.
+#'\itemize{
+#'  \item  \strong{OrignalName} : The original miRNA name (Column 1).\cr
+#'  \item \strong{TargetName} : The converted miRBase name (in specified version) corresponding to the original miRNA name (Column 2).\cr
+#'  \item \strong{AccessionID} : The corresponding miRBase accession ID (Column 3).
+#'}
 #' @examples
 #' data(miRNATest)
 #' miRNANames=miRNATest[,2]
 #' result1=miRNAVersionConvert(miRNANames,targetVersion="v13",exact=TRUE)
 #' result2=miRNAVersionConvert(miRNANames,targetVersion="v21",exact=TRUE)
 #' result3=miRNAVersionConvert(miRNANames,targetVersion="v21",exact=FALSE)
-#'
 #' @author
 #' Xu, Taosheng \email{taosheng.x@@gmail.com}
-#'
 #' @export
-#'
-
 miRNAVersionConvert<-function(miRNANames,targetVersion="v21",exact=TRUE)
 {
   #version=paste("miRNA_",tolower(targetVersion),sep="")
@@ -42,39 +38,39 @@ miRNAVersionConvert<-function(miRNANames,targetVersion="v21",exact=TRUE)
     stop("It is a wrong target version, Please check it")
 
   temp=unique(as.vector(miRNANames))
-  sYM_ID=match(temp,SYM[,2])
+  SYM_ID=match(temp,SYM[,2])
 
   temp_target=data.frame("orignal"=temp,"SYM"=NA,"ACC"=NA,stringsAsFactors=FALSE)
-  for(i in 1:length(sYM_ID))
+  for(i in 1:length(SYM_ID))
   {
-    if(!is.na(sYM_ID[i]))
+    if(!is.na(SYM_ID[i]))
     {
-      ind1=which(sYM_ID[i]==ACC_SYM[,2])
+      ind1=which(SYM_ID[i]==ACC_SYM[,2])
       ACC_ID=ACC_SYM[ind1,1]
-      ind3=match(ACC_ID,miRNA_data[[ver_index]]$ACC)
-      ACC_ID=ACC_ID[!is.na(ind3)]
-      ind3=ind3[!is.na(ind3)]
+      ind2=match(ACC_ID,miRNA_data[[ver_index]]$ACC)
+      ACC_ID=ACC_ID[!is.na(ind2)]
+      ind2=ind2[!is.na(ind2)]
 
-      ind4= miRNA_data[[ver_index]]$SYM[ind3]
-      ind4=unique(ind4)
+      ind3= miRNA_data[[ver_index]]$SYM[ind2]
+      ind3=unique(ind3)
       ###############################
       if(exact)
       {
-        ind5=match(temp[i],SYM[ind4,2])
-        if(!is.na(ind5))
+        ind4=match(temp[i],SYM[ind3,2])
+        if(!is.na(ind4))
         {
-          mm=SYM[ind4,2][ind5]
-          nn=ACC[ACC_ID,2][ind5]
+          mm=SYM[ind3,2][ind4]
+          nn=ACC[ACC_ID,2][ind4]
         }
         else
         {
-          mm=SYM[ind4,2]
+          mm=SYM[ind3,2]
           nn=ACC[ACC_ID,2]
         }
       }
       else
       {
-        mm=SYM[ind4,2]
+        mm=SYM[ind3,2]
         nn=ACC[ACC_ID,2]
       }
       ###################################
@@ -91,20 +87,20 @@ miRNAVersionConvert<-function(miRNANames,targetVersion="v21",exact=TRUE)
     aa=temp_target[multiindex,]
     colnames(aa)<-c("orignal",paste("Version",targetVersion),"accession")
     rownames(aa)<-NULL
-    cat("********************************************\n")
-    cat("The multiple matched miRNAs are list below: \n")
-    cat("                                            \n")
+    message("********************************************\n")
+    message("The multiple matched miRNAs are list below: \n")
+    message("                                            \n")
     print.data.frame(aa)
   }
   #####################
 
-  target= cbind("orignal"=miRNANames,"targetName"=NA,"accession"=NA)
+  target= cbind("OrignalName"=miRNANames,"TargetName"=NA,"AccessionID"=NA)
   for(i in 1:length(temp))
   {
-    ind6=which(miRNANames==temp[i])
-    #if(!is.na(ind6))
-    target[ind6,2]=temp_target[i,2]
-    target[ind6,3]=temp_target[i,3]
+    ind5=which(miRNANames==temp[i])
+    #if(!is.na(ind5))
+    target[ind5,2]=temp_target[i,2]
+    target[ind5,3]=temp_target[i,3]
   }
   colnames(target)[2]=paste("Version",targetVersion)
   target
@@ -123,10 +119,10 @@ miRNAVersionConvert<-function(miRNANames,targetVersion="v21",exact=TRUE)
 
 #' @return
 #' A nx2 data matrix. The number of row equals to input miRNA name. The two columns are defined as below:
-#'
-#'
-#'  \strong{Column 1} : The Accession ID.\cr
-#'  \strong{Column 2} : The converted miRBase name (in specified version) corresponding to the Accession ID.\cr
+#'\itemize{
+#' \item \strong{AccessionID} : The Accession ID of miRNAs (Column 1).\cr
+#' \item  \strong{TargetName} : The converted miRBase name (in specified version) corresponding to the Accession ID (Column 2).\cr
+#' }
 #' @examples
 #' data(miRNATest)
 #' AccessionIDs=miRNATest[,1]
@@ -156,13 +152,13 @@ miRNA_AccessionToName<-function(AccessionIDs,targetVersion="v21")
       ind1=match(ACC_ID[i],miRNA_data[[ver_index]]$ACC)
       if(!is.na(ind1))
       {
-        sYM_ID=miRNA_data[[ver_index]]$SYM[ind1]
-        temp_target[i,2]=SYM[sYM_ID,2]
+        SYM_ID=miRNA_data[[ver_index]]$SYM[ind1]
+        temp_target[i,2]=SYM[SYM_ID,2]
       }
     }
 
   }
-  target= cbind("Accession ID"=AccessionIDs,"targetName"=NA)
+  target= cbind("AccessionID"=AccessionIDs,"TargetName"=NA)
   for(i in 1:length(temp))
   {
     ind2=which(AccessionIDs==temp[i])
@@ -186,9 +182,10 @@ miRNA_AccessionToName<-function(AccessionIDs,targetVersion="v21")
 #' @return
 #' A nx2 data matrix. The number of row equals to input miRNA name. The two columns are defined as below:
 #'
-#'
-#'  \strong{Column 1} : The input miRNA names.\cr
-#'  \strong{Column 2} : The convert Accession ID.\cr
+#' \itemize{
+#'  \item \strong{miRNAName_\{Version\}} : The input miRNA names (Column 1).\cr
+#'  \item \strong{AccessionID} : The convert Accession ID (Column 2).\cr
+#'  }
 #' @examples
 #' data(miRNATest)
 #' miRNANames=miRNATest[,2]
@@ -210,14 +207,14 @@ miRNA_NameToAccession<-function(miRNANames,Version="v21")
   #miRNANames=miRNATest[,2]
   temp=unique(as.vector(miRNANames))
 
-  sYM_ID=match(temp,SYM[,2])
-  ind1=match(sYM_ID,miRNA_data[[ver_index]]$SYM)
+  SYM_ID=match(temp,SYM[,2])
+  ind1=match(SYM_ID,miRNA_data[[ver_index]]$SYM)
   ind2=miRNA_data[[ver_index]]$ACC[ind1]
   ACC_ID=ACC[ind2,2]
   temp_target=data.frame("orignal"=temp,"ACC"=ACC_ID,stringsAsFactors=FALSE)
 
 
-  target= cbind("miRNAName"=miRNANames,"Accession ID"=NA)
+  target= cbind("miRNAName"=miRNANames,"AccessionID"=NA)
   for(i in 1:length(temp))
   {
     ind3=which(miRNANames==temp[i])
@@ -241,9 +238,10 @@ miRNA_NameToAccession<-function(miRNANames,Version="v21")
 #' @return
 #' A nx2 data matrix. The number of row equals to input miRNA. The two columns are defined as below:
 #'
-#'
-#'  \strong{Column 1} : The original miRNA.\cr
-#'  \strong{Column 2} : The return miRNA sequence (in specified version) corresponding to the input miRNAs.\cr
+#' \itemize{
+#'  \item \strong{AccessionID} : The original miRNA (Column 1).\cr
+#'  \item \strong{miRNASequence_\{targetVersion\}} : The return miRNA sequence (in specified version) corresponding to the input miRNAs (Column 2).\cr
+#'  }
 #' @examples
 #' #####1,The input aer miRNA Names
 #' data(miRNATest)
@@ -286,13 +284,13 @@ getMiRNASequence<-function(AccessionIDs,targetVersion="v21")
       }
     }
   }
-  target= cbind("Accession ID"=AccessionIDs,"Seq"=NA)
+  target= cbind("AccessionID"=AccessionIDs,"miRNASequence"=NA)
   for(i in 1:length(temp))
   {
     ind2=which(AccessionIDs==temp[i])
     target[ind2,2]=temp_target[i,2]
   }
-  colnames(target)[2]=paste("Version",targetVersion,"Sequence")
+  colnames(target)[2]=paste("miRNASequence_",targetVersion,sep="")
   target
 }
 
@@ -382,7 +380,7 @@ getMiRNAHistory<-function(AccessionID)
   }
   else
   {
-    cat("There is no records about this miRNA.")
+    message("There is no records about this miRNA.")
     NULL
   }
 }
@@ -407,14 +405,14 @@ getMiRNAHistory<-function(AccessionID)
 checkMiRNAVersion<-function(miRNANames)
 {
   temp=unique(as.vector(miRNANames))
-  sYM_ID=match(temp,SYM[,2])
-  sYM_ID=na.omit(sYM_ID)
+  SYM_ID=match(temp,SYM[,2])
+  SYM_ID=na.omit(SYM_ID)
   result=data.frame(matrix(vector(),nrow(VER), 3,dimnames=list(c(), c("Version","Porportion","Recommend") )),stringsAsFactors=FALSE)
   result$Version<-VER[,2]
 
   for(i in 1:nrow(VER))
   {
-    num =length(intersect(miRNA_data[[i]]$SYM, sYM_ID))
+    num =length(intersect(miRNA_data[[i]]$SYM, SYM_ID))
     result$Porportion[i]=round((num/length(temp))*100,2)
   }
   result$Recommend=""

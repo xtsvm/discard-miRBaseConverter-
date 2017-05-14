@@ -18,9 +18,10 @@ The optional values are in below:\cr
 \value{
 A nx2 data matrix. The number of row equals to input miRNA name. The two columns are defined as below:
 
-
- \strong{Column 1} : The input miRNA names.\cr
- \strong{Column 2} : The convert Accession ID.\cr
+\itemize{
+ \item \strong{miRNAName_\{Version\}} : The input miRNA names (Column 1).\cr
+ \item \strong{AccessionID} : The convert Accession ID (Column 2).\cr
+ }
 }
 \description{
 This function converts a group of any species' miRNA name to the Accession ID defined in miRBase.

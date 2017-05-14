@@ -21,11 +21,11 @@ If FALSE, the result will include all the possible matched miRNA name. If one mi
 }
 \value{
 A nx3 data matrix. The number of row equals to input miRNA name. The three columns are defined as below:
-
-
- \strong{Column 1} : The original miRNA name.\cr
- \strong{Column 2} : The converted miRBase name (in specified version) corresponding to the original miRNA name.\cr
- \strong{Column 3} : The corresponding miRBase accession ID.
+\itemize{
+ \item  \strong{OrignalName} : The original miRNA name (Column 1).\cr
+ \item \strong{TargetName} : The converted miRBase name (in specified version) corresponding to the original miRNA name (Column 2).\cr
+ \item \strong{AccessionID} : The corresponding miRBase accession ID (Column 3).
+}
 }
 \description{
 This function converts a group of any species' miRNA names (including precursor and mature miRNA) to a specified miRBase version if the miRNAs have been defined in miRBase.
@@ -40,7 +40,6 @@ miRNANames=miRNATest[,2]
 result1=miRNAVersionConvert(miRNANames,targetVersion="v13",exact=TRUE)
 result2=miRNAVersionConvert(miRNANames,targetVersion="v21",exact=TRUE)
 result3=miRNAVersionConvert(miRNANames,targetVersion="v21",exact=FALSE)
-
 }
 \author{
 Xu, Taosheng \email{taosheng.x@gmail.com}

@@ -18,9 +18,10 @@ The optional values are in below:\cr
 \value{
 A nx2 data matrix. The number of row equals to input miRNA. The two columns are defined as below:
 
-
- \strong{Column 1} : The original miRNA.\cr
- \strong{Column 2} : The return miRNA sequence (in specified version) corresponding to the input miRNAs.\cr
+\itemize{
+ \item \strong{AccessionID} : The original miRNA (Column 1).\cr
+ \item \strong{miRNASequence_\{targetVersion\}} : The return miRNA sequence (in specified version) corresponding to the input miRNAs (Column 2).\cr
+ }
 }
 \description{
 This function return the miRNA sequence based on the miRNA name or Accession ID.
