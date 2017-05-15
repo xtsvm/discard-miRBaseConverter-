@@ -17,7 +17,7 @@ This function check miRBase Version for a list of miRNA names
 }
 \examples{
 data(miRNATest)
-miRNANames=miRNATest[,2]
+miRNANames=miRNATest$miRNA_Name
 checkMiRNAVersion(miRNANames)
 
 }

@@ -23,7 +23,7 @@
 #'}
 #' @examples
 #' data(miRNATest)
-#' miRNANames=miRNATest[,2]
+#' miRNANames=miRNATest$miRNA_Name
 #' result1=miRNAVersionConvert(miRNANames,targetVersion="v13",exact=TRUE)
 #' result2=miRNAVersionConvert(miRNANames,targetVersion="v21",exact=TRUE)
 #' result3=miRNAVersionConvert(miRNANames,targetVersion="v21",exact=FALSE)
@@ -125,7 +125,7 @@ miRNAVersionConvert<-function(miRNANames,targetVersion="v21",exact=TRUE)
 #' }
 #' @examples
 #' data(miRNATest)
-#' AccessionIDs=miRNATest[,1]
+#' AccessionIDs=miRNATest$AccessionID
 #' result1=miRNA_AccessionToName(AccessionIDs,targetVersion="v13")
 #' result2=miRNA_AccessionToName(AccessionIDs,targetVersion="v21")
 #'
@@ -139,7 +139,7 @@ miRNA_AccessionToName<-function(AccessionIDs,targetVersion="v21")
   ver_index=match(tolower(targetVersion),VER[,2])
   if(is.na(ver_index))
     stop("It is a wrong target version, Please check it")
-  #AccessionIDs=miRNATest[,1]
+  #AccessionIDs=miRNATest$AccessionID
   temp=unique(as.vector(AccessionIDs))
 
   temp_target=data.frame("ACC"=temp,"SYM"=NA,stringsAsFactors=FALSE)
@@ -188,7 +188,7 @@ miRNA_AccessionToName<-function(AccessionIDs,targetVersion="v21")
 #'  }
 #' @examples
 #' data(miRNATest)
-#' miRNANames=miRNATest[,2]
+#' miRNANames=miRNATest$miRNA_Name
 #' checkMiRNAVersion(miRNANames)
 #' result1=miRNA_NameToAccession(miRNANames,Version="v18")
 #' result2=miRNA_AccessionToName(result1[,2],targetVersion="v21")
@@ -204,7 +204,7 @@ miRNA_NameToAccession<-function(miRNANames,Version="v21")
   ver_index=match(tolower(Version),VER[,2])
   if(is.na(ver_index))
     stop("It is a wrong target version, Please check it")
-  #miRNANames=miRNATest[,2]
+  #miRNANames=miRNATest$miRNA_Name
   temp=unique(as.vector(miRNANames))
 
   SYM_ID=match(temp,SYM[,2])
@@ -245,7 +245,7 @@ miRNA_NameToAccession<-function(miRNANames,Version="v21")
 #' @examples
 #' #####1,The input aer miRNA Names
 #' data(miRNATest)
-#' miRNANames=miRNATest[,2]
+#' miRNANames=miRNATest$miRNA_Name
 #' result1=miRNAVersionConvert(miRNANames,targetVersion="v21",exact=TRUE)
 #' AccessionIDs=result1[,3]
 #' result2=getMiRNASequence(AccessionIDs,targetVersion="v21")
@@ -253,7 +253,7 @@ miRNA_NameToAccession<-function(miRNANames,Version="v21")
 
 #' #####2,The input are miRNA Accession IDs
 #' data(miRNATest)
-#' AccessionIDs=miRNATest[,1]
+#' AccessionIDs=miRNATest$AccessionID
 #' result3=getMiRNASequence(AccessionIDs,targetVersion="v13")
 #' result4=getMiRNASequence(AccessionIDs,targetVersion="v21")
 #'
@@ -395,7 +395,7 @@ getMiRNAHistory<-function(AccessionID)
 #'  The version information is printed in the console.
 #' @examples
 #' data(miRNATest)
-#' miRNANames=miRNATest[,2]
+#' miRNANames=miRNATest$miRNA_Name
 #' checkMiRNAVersion(miRNANames)
 #'
 #' @author
@@ -407,17 +407,17 @@ checkMiRNAVersion<-function(miRNANames)
   temp=unique(as.vector(miRNANames))
   SYM_ID=match(temp,SYM[,2])
   SYM_ID=na.omit(SYM_ID)
-  result=data.frame(matrix(vector(),nrow(VER), 3,dimnames=list(c(), c("Version","Porportion","Recommend") )),stringsAsFactors=FALSE)
+  result=data.frame(matrix(vector(),nrow(VER), 3,dimnames=list(c(), c("Version","Proportion","Recommend") )),stringsAsFactors=FALSE)
   result$Version<-VER[,2]
 
   for(i in 1:nrow(VER))
   {
     num =length(intersect(miRNA_data[[i]]$SYM, SYM_ID))
-    result$Porportion[i]=round((num/length(temp))*100,2)
+    result$Proportion[i]=round((num/length(temp))*100,2)
   }
   result$Recommend=""
-  result[result$Porportion == max(result$Porportion), "Recommend"] <- "*****"
-  result$Porportion=paste(result$Porportion,"%",sep="")
+  result[result$Proportion == max(result$Proportion), "Recommend"] <- "*****"
+  result$Proportion=paste(result$Proportion,"%",sep="")
   print.data.frame(result)
 }
 

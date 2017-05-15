@@ -2,7 +2,7 @@
 #'
 #'\itemize{
 #'  \item AccessionID : miRNA Accession ID in miRBase
-#'  \item Name : miRNA name
+#'  \item miRNA_Name : miRNA name
 #'}
 #'
 #'@docType data
@@ -12,7 +12,7 @@
 #'@examples
 #' data(miRNATest)
 #' @note
-#' This is a miRNA name collection for the test of examples in the package.
+#' This is a mixed miRNA name collection of some species for the examples' test in the package.
 #'
 NULL
 

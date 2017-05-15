@@ -27,7 +27,7 @@ This function converts a group of any species' miRNA Accession ID (including pre
 }
 \examples{
 data(miRNATest)
-AccessionIDs=miRNATest[,1]
+AccessionIDs=miRNATest$AccessionID
 result1=miRNA_AccessionToName(AccessionIDs,targetVersion="v13")
 result2=miRNA_AccessionToName(AccessionIDs,targetVersion="v21")
 

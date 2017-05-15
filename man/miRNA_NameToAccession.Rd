@@ -28,7 +28,7 @@ This function converts a group of any species' miRNA name to the Accession ID de
 }
 \examples{
 data(miRNATest)
-miRNANames=miRNATest[,2]
+miRNANames=miRNATest$miRNA_Name
 checkMiRNAVersion(miRNANames)
 result1=miRNA_NameToAccession(miRNANames,Version="v18")
 result2=miRNA_AccessionToName(result1[,2],targetVersion="v21")

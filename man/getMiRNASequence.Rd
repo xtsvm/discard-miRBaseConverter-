@@ -29,14 +29,14 @@ This function return the miRNA sequence based on the miRNA name or Accession ID.
 \examples{
 #####1,The input aer miRNA Names
 data(miRNATest)
-miRNANames=miRNATest[,2]
+miRNANames=miRNATest$miRNA_Name
 result1=miRNAVersionConvert(miRNANames,targetVersion="v21",exact=TRUE)
 AccessionIDs=result1[,3]
 result2=getMiRNASequence(AccessionIDs,targetVersion="v21")
 
 #####2,The input are miRNA Accession IDs
 data(miRNATest)
-AccessionIDs=miRNATest[,1]
+AccessionIDs=miRNATest$AccessionID
 result3=getMiRNASequence(AccessionIDs,targetVersion="v13")
 result4=getMiRNASequence(AccessionIDs,targetVersion="v21")
 

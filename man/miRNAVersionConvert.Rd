@@ -36,7 +36,7 @@ match the unique name in target version. In order to return the accurate result 
 }
 \examples{
 data(miRNATest)
-miRNANames=miRNATest[,2]
+miRNANames=miRNATest$miRNA_Name
 result1=miRNAVersionConvert(miRNANames,targetVersion="v13",exact=TRUE)
 result2=miRNAVersionConvert(miRNANames,targetVersion="v21",exact=TRUE)
 result3=miRNAVersionConvert(miRNANames,targetVersion="v21",exact=FALSE)
