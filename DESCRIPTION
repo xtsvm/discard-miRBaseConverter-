@@ -1,7 +1,7 @@
 Package: miRBaseConverter
 Type: Package
 Title: A converter for miRNA Name, Accession and Sequence in different miRBase Versions
-Version: 0.99.3
+Version: 0.99.4
 Date: 2017-5-9
 Author: Taosheng Xu<taosheng.x@gmail.com>
 Maintainer: Taosheng Xu<taosheng.x@gmail.com>

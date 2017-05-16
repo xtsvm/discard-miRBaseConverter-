@@ -9,6 +9,3 @@ devtools::install_github("xtsvm/miRBaseConverter")
 
 ## miRBaseConverter usage
 The tutorial and examples of `miRBaseConverter` pacakge can be found [here](http://htmlpreview.github.io/?https://github.com/xtsvm/Documents/blob/master/miRBaseConverter-vignette.html).
-
-<!--(http://htmlpreview.github.io/?https://github.com/xtsvm/Documents/blob/master/miRBaseConverter-vignette.html)-->
-<!--(https://github.com/xtsvm/CancerSubtypes/blob/master/vignettes/miRBaseConverter-vignette.Rmd)-->
