@@ -1,5 +1,5 @@
 ---
-title: "miRBaseConverter: A converter for miRNA Name, Accession and Sequence in different miRBase Versions"
+title: "miRBaseConverter: A converter for miRNA Name, Accession ID and Sequence in different miRBase Versions"
 author: Taosheng Xu
 date: '`r Sys.Date()`'
 output:
@@ -33,7 +33,7 @@ knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 # Overview
-*miRBaseConverter* is a R package for converting the definition of miRNAs ( Names, Accession IDs, Sequences and others) in miRBase different versions ( From miRBase Version 6 to miRBase version 21 [ The latest version ] ). A compressed build-in database is embedded in the *miRBaseConverter* R package for retrieving miRNA information efficiently.
+*miRBaseConverter* is an R package for converting the definition of miRNAs ( Names, Accession IDs, Sequences and others) in miRBase different versions ( From miRBase Version 6 to miRBase version 21 [ The latest version ] ). A compressed build-in database is embedded in the *miRBaseConverter* R package for retrieving miRNA information efficiently.
 
 _microRNAs( miRNAs)_ are the short non-coding RNA molecules (containing about 22 nucleotides). However, _miRNAs_ are one of the essential molecules that play the important role in the post-transcriptional gene regulation. The researches about the new miRNAs discovery and the function definition have an explosive growth in the last decade. The _miRBase_ database is an authority archive of miRNA annotation and sequences for all species. With the development of researches about miRNAs, the definition miRNAs have been changed a lot in miRBase and developed many different historical versions. Each of the previous versions has been adopted in many research literatures. Due to the inconsistent of name annotation of miRNAs, it is a barrier for the later scholars to reuse the previous research results in an easy way, especially for miRNA databases with thousands of entries. We admit that there are some webservers can handle the batch conversion of miRNA names. However, an easy and well-documented tool in R for miRNA conversion is still lack.  To bridge this gap, we present the *miRBaseConverter* package, a convenient tool for users to conduct miRNA conversion, to provide a suite of tools for checking miRNA Name, Accession, Sequence, version and history. The *miRBaseConverter* package can be competent for all species including Precursor and Mature miRNAs defined in miRBase. The purpose of *miRBaseConverter* package is to provide a handy tool for the demands of researches about miRNA version convert and comparison of historical information.
 
