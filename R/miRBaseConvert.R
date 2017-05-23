@@ -410,5 +410,5 @@ goToMiRBase<-function(AccessionID)
     else
       URL=paste0("http://www.mirbase.org/cgi-bin/mirna_entry.pl?acc=",AccessionID)
   }
-  shell.exec(URL)
+  utils::browseURL(URL)
 }
