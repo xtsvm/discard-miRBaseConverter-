@@ -3,6 +3,7 @@
 export(checkMiRNAVersion)
 export(getMiRNAHistory)
 export(getMiRNASequence)
+export(goToMiRBase)
 export(miRNAVersionConvert)
 export(miRNA_AccessionToName)
 export(miRNA_NameToAccession)

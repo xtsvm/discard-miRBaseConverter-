@@ -4,42 +4,49 @@
 \alias{miRNAVersionConvert}
 \title{miRBase name version convert}
 \usage{
-miRNAVersionConvert(miRNANames, targetVersion = "v21", exact = TRUE)
+miRNAVersionConvert(miRNANames, targetVersion = "v21", exact = TRUE,
+  verbose = TRUE)
 }
 \arguments{
 \item{miRNANames}{A character vector representing the source miRNA names needed to be convert.}
 
-\item{targetVersion}{A character value representing the target miRBase version name corresponding the source miRNA name.
+\item{targetVersion}{A character value representing the target miRBase version corresponding the source miRNA names.
 The optional values are in below:\cr
 "v6","v7_1","v8","v8_1","v8_2","v9","v9_1",\cr
 "v9_2","v10","v10_1","v11","v12","v13","v14",\cr
 "v15","v16","v17","v18","v19","v20","v21"\cr}
 
 \item{exact}{logical value. If true, the result will be the most exactly matched result.
-If FALSE, the result will include all the possible matched miRNA name. If one miRNA can match multiple names. All the names will be
+If FALSE, the result will include all the possible matched miRNA name. If one miRNA can match multiple names. All the matched names are
  concatenated with "&".}
+
+\item{verbose}{logical value. If true, it will print the multiple matched miRNA names and Accession IDs to the console.}
 }
 \value{
-A nx3 data matrix. The number of row equals to input miRNA name. The three columns are defined as below:
+A data frame with three columns. The three columns are defined as below:
 \itemize{
- \item  \strong{OrignalName} : The original miRNA name (Column 1).\cr
- \item \strong{TargetName} : The converted miRBase name (in specified version) corresponding to the original miRNA name (Column 2).\cr
- \item \strong{AccessionID} : The corresponding miRBase accession ID (Column 3).
+ \item  \strong{OriginalName} : The original miRNA names (Column 1).\cr
+ \item \strong{TargetName} : The converted miRBase names (in specified version) corresponding to the original miRNA names (Column 2).\cr
+ \item \strong{AccessionID} : The corresponding miRBase accession IDs (Column 3).
 }
 }
 \description{
-This function converts a group of any species' miRNA names (including precursor and mature miRNA) to a specified miRBase version if the miRNAs have been defined in miRBase.
+This function converts a group of any species' miRNA names (including precursor and mature miRNA) to the specified miRBase version if the miRNAs have been defined in miRBase.
 }
 \note{
-Please note: Due to some miRNAs' name changing many times in history. Even if choose the third parameter "exact"=TRUE, maybe it may still have some miRNAs that cannot
-match the unique name in target version. In order to return the accurate result as possible, We also concatenate the multiple matched miRNA name with "&". This is rare case but it happens sometimes.
+Please note: Due to some miRNA names changing many times in history. Even if choose the third parameter "exact"=TRUE, it may still have some miRNAs that can't
+match the unique name in the target version. In order to return the accurate result as possible, we also concatenate the multiple matched miRNA names with "&". This is the rare case but it happens sometimes.
 }
 \examples{
 data(miRNATest)
 miRNANames=miRNATest$miRNA_Name
-result1=miRNAVersionConvert(miRNANames,targetVersion="v13",exact=TRUE)
-result2=miRNAVersionConvert(miRNANames,targetVersion="v21",exact=TRUE)
-result3=miRNAVersionConvert(miRNANames,targetVersion="v21",exact=FALSE)
+result1=miRNAVersionConvert(miRNANames,targetVersion="v13",exact=TRUE,verbose=TRUE)
+result2=miRNAVersionConvert(miRNANames,targetVersion="v21",exact=TRUE,verbose=TRUE)
+result3=miRNAVersionConvert(miRNANames,targetVersion="v21",exact=FALSE,verbose=TRUE)
+
+miRNANames=c( "hsa-let-7c","hsa-miR-3190-3p","hsa-let-7c","hsa-miR-34b","hsa-miR-378",
+"hsa-miR-499a-3p","hsa-miR-499a-5p","hsa-miR-500","hsa-miR-516a-5p","hsa-miR-550","hsa-miR-589")
+result4=miRNAVersionConvert(miRNANames, targetVersion="v21", exact=TRUE, verbose=TRUE)
 }
 \author{
 Xu, Taosheng \email{taosheng.x@gmail.com}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/miRBaseConvert.R
 \name{getMiRNAHistory}
 \alias{getMiRNAHistory}
-\title{Obtain all versions information for a single specified miRNA.}
+\title{Obtain all miRBase versions' information for a single specified miRNA.}
 \usage{
 getMiRNAHistory(AccessionID)
 }
@@ -14,7 +14,7 @@ A 21X7 data frame including all the history information (Precursor, Mature, Sequ
  Each row represents a miRBase version.
 }
 \description{
-This function return all versions information of a single specified miRNA.
+This function returns all miRBase versions' information of a single specified miRNA.
 }
 \examples{
 #####1,The input is a miRNA Name

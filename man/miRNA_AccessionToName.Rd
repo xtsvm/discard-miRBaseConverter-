@@ -7,23 +7,23 @@
 miRNA_AccessionToName(AccessionIDs, targetVersion = "v21")
 }
 \arguments{
-\item{AccessionIDs}{A character vector representing the Accession ID needed to be convert.}
+\item{AccessionIDs}{A character vector representing the Accession IDs needed to be convert.}
 
-\item{targetVersion}{A character value representing the target miRBase version name corresponding the Accession ID.
+\item{targetVersion}{A character value representing the target miRBase version corresponding the Accession IDs.
 The optional values are in below:\cr
 "v6","v7_1","v8","v8_1","v8_2","v9","v9_1",\cr
 "v9_2","v10","v10_1","v11","v12","v13","v14",\cr
 "v15","v16","v17","v18","v19","v20","v21"\cr}
 }
 \value{
-A nx2 data matrix. The number of row equals to input miRNA name. The two columns are defined as below:
+A nx2 data frame. The number of rows equal to the input miRNA names. The two columns are defined as below:
 \itemize{
 \item \strong{AccessionID} : The Accession ID of miRNAs (Column 1).\cr
-\item  \strong{TargetName} : The converted miRBase name (in specified version) corresponding to the Accession ID (Column 2).\cr
+\item  \strong{TargetName} : The converted miRBase names (in specified version) corresponding to the Accession IDs (Column 2).\cr
 }
 }
 \description{
-This function converts a group of any species' miRNA Accession ID (including precursor and mature miRNA) to a specified miRBase version name if the Accession ID have been defined in miRBase.
+This function converts a group of any species' miRNA Accession IDs (including precursor and mature miRNA) to a specified miRBase version if the Accession IDs have been defined in miRBase.
 }
 \examples{
 data(miRNATest)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/miRBaseConvert.R
 \name{checkMiRNAVersion}
 \alias{checkMiRNAVersion}
-\title{check miRNA Version in miRBase}
+\title{check the miRNA Version in miRBase}
 \usage{
 checkMiRNAVersion(miRNANames)
 }
@@ -13,7 +13,7 @@ checkMiRNAVersion(miRNANames)
 The version information is printed in the console.
 }
 \description{
-This function check miRBase Version for a list of miRNA names
+This function checks miRBase Version for a list of miRNA names
 }
 \examples{
 data(miRNATest)

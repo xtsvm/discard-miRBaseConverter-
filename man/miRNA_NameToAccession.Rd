@@ -2,21 +2,21 @@
 % Please edit documentation in R/miRBaseConvert.R
 \name{miRNA_NameToAccession}
 \alias{miRNA_NameToAccession}
-\title{The miRBase miRNA Name with specified version to Accession ID}
+\title{The miRBase miRNA names with specified version to Accession IDs}
 \usage{
 miRNA_NameToAccession(miRNANames, Version = "v21")
 }
 \arguments{
 \item{miRNANames}{A character vector representing the source miRNA names needed to be convert.}
 
-\item{Version}{A character value representing the version name corresponding the miRNANames.
+\item{Version}{A character value representing the version corresponding the miRNANames.
 The optional values are in below:\cr
 "v6","v7_1","v8","v8_1","v8_2","v9","v9_1",\cr
 "v9_2","v10","v10_1","v11","v12","v13","v14",\cr
 "v15","v16","v17","v18","v19","v20","v21"\cr}
 }
 \value{
-A nx2 data matrix. The number of row equals to input miRNA name. The two columns are defined as below:
+A nx2 data frame. The number of rows equal to the input miRNA names. The two columns are defined as below:
 
 \itemize{
  \item \strong{miRNAName_\{Version\}} : The input miRNA names (Column 1).\cr
@@ -24,7 +24,7 @@ A nx2 data matrix. The number of row equals to input miRNA name. The two columns
  }
 }
 \description{
-This function converts a group of any species' miRNA name to the Accession ID defined in miRBase.
+This function converts a group of any species' miRNA name to the Accession IDs defined in miRBase.
 }
 \examples{
 data(miRNATest)
