@@ -1,6 +1,6 @@
 Package: miRBaseConverter
 Type: Package
-Title: A comprehensive tool for converting and retrieving miRNA information in miRBase historical versions.
+Title: A comprehensive tool for converting and retrieving miRNA information in miRBase historical versions
 Version: 0.99.9
 Date: 2017-5-9
 Author: Taosheng Xu<taosheng.x@gmail.com>, Thuc Le<Thuc.Le@unisa.edu.au>
@@ -10,7 +10,7 @@ Depends: R (>= 3.4)
 Description: A comprehensive tool for converting and retrieving the miRNA Name, Accession, Sequence, Version and Family information in miRBase historical versions. It can process a huge number of miRNAs in short time without other depends.
 License: GPL (>= 2)
 LazyData: TRUE
-Suggests: BiocGenerics, knitr, rtracklayer, utils
+Suggests: BiocGenerics, RUnit, knitr, rtracklayer, utils
 VignetteBuilder: knitr
 biocViews: Software, miRNA
 URL: https://github.com/xtsvm/miRBaseConverter
